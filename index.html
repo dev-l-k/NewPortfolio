@@ -1,0 +1,1286 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dev L Kakkoth · Student Developer</title>
+  <!-- Font Awesome 6 (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Google Fonts: Inter + JetBrains Mono for a modern, professional feel -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #f9fafc;
+      color: #1e1e2f;
+      line-height: 1.6;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      width: 100%;
+    }
+
+    /* header / nav */
+    header {
+      padding: 1.75rem 0 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 50;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.6rem;
+      letter-spacing: -0.02em;
+      color: #0a0a1a;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .logo span {
+      background: linear-gradient(135deg, #2a6df4, #8b5cf6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      font-weight: 500;
+      font-size: 0.95rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #2d2d44;
+      transition: color 0.2s ease;
+      padding: 0.25rem 0;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus {
+      color: #2a6df4;
+    }
+
+    /* mobile nav toggle button */
+    .nav-toggle {
+      display: none;
+      background: white;
+      border: 1px solid #e2e8f0;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      color: #1e1e2f;
+      font-size: 1.25rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+      transition: all 0.2s ease;
+    }
+
+    .nav-toggle:hover {
+      background: #f1f5f9;
+      color: #2a6df4;
+    }
+
+    /* hero */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      padding: 3rem 0 4rem;
+      gap: 3rem;
+    }
+
+    .hero-content {
+      flex: 1 1 480px;
+      min-width: 0;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #eef2ff;
+      color: #2a6df4;
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 0.4rem 1.1rem;
+      border-radius: 30px;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.3px;
+      border: 1px solid #d9e3fc;
+    }
+
+    .hero-content h1 {
+      font-size: clamp(2.2rem, 5.5vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.2rem;
+      color: #0b0b1a;
+      word-break: break-word;
+    }
+
+    .hero-highlight {
+      background: linear-gradient(135deg, #2a6df4, #8b5cf6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-content p {
+      font-size: clamp(1.05rem, 2.5vw, 1.2rem);
+      color: #3b3b58;
+      max-width: 550px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 0.9rem;
+      margin-bottom: 2.2rem;
+    }
+
+    .hero-tags span {
+      font-size: 0.88rem;
+      background: white;
+      padding: 0.4rem 0.95rem;
+      border-radius: 40px;
+      border: 1px solid #e2e8f0;
+      font-weight: 500;
+      color: #2d2d44;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    }
+
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .btn-primary {
+      background: #1e1e2f;
+      color: white;
+      padding: 0.85rem 2rem;
+      border-radius: 60px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 1px solid transparent;
+      min-height: 48px;
+    }
+
+    .btn-primary i {
+      font-size: 1rem;
+    }
+
+    .btn-primary:hover {
+      background: #2a6df4;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 20px -10px rgba(42, 109, 244, 0.4);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #cbd5e1;
+      color: #1e1e2f;
+      padding: 0.85rem 2rem;
+      border-radius: 60px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 48px;
+    }
+
+    .btn-outline i {
+      font-size: 1rem;
+    }
+
+    .btn-outline:hover {
+      border-color: #2a6df4;
+      color: #2a6df4;
+      background: #f0f5ff;
+    }
+
+    .hero-visual {
+      flex: 1 1 320px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 0;
+      width: 100%;
+    }
+
+    .code-card {
+      background: #0f0f1e;
+      padding: 1.8rem;
+      border-radius: 28px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 30px 40px -20px rgba(0, 0, 0, 0.4);
+      border: 1px solid #2d2d4a;
+      transform: rotate(2deg);
+      transition: transform 0.3s ease;
+      overflow: hidden;
+    }
+
+    .code-card:hover {
+      transform: rotate(0deg);
+    }
+
+    .code-dots {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 1.25rem;
+    }
+
+    .code-dots span {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #3e3e5e;
+    }
+
+    .code-dots span:first-child { background: #f87171; }
+    .code-dots span:nth-child(2) { background: #fbbf24; }
+    .code-dots span:last-child { background: #34d399; }
+
+    .code-lines {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.78rem, 2.2vw, 0.9rem);
+      color: #cbd5e1;
+      line-height: 1.8;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .code-lines .comment { color: #6b7280; }
+    .code-lines .keyword { color: #c084fc; }
+    .code-lines .string { color: #86efac; }
+    .code-lines .func { color: #60a5fa; }
+    .code-lines .number { color: #fbbf24; }
+
+    /* section styling */
+    section {
+      padding: 4.5rem 0;
+    }
+
+    .section-header {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 600;
+      color: #2a6df4;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.85rem, 4.5vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #0b0b1a;
+      line-height: 1.25;
+    }
+
+    .section-title span {
+      color: #6b7280;
+      font-weight: 400;
+    }
+
+    /* focus / services grid */
+    .focus-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+      gap: 1.5rem;
+    }
+
+    .focus-card {
+      background: white;
+      padding: 1.8rem 1.5rem;
+      border-radius: 24px;
+      border: 1px solid #eef2f6;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+    }
+
+    .focus-card:hover {
+      border-color: #cbd5e1;
+      box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.08);
+      transform: translateY(-4px);
+    }
+
+    .focus-icon {
+      font-size: 1.8rem;
+      background: #eef2ff;
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 18px;
+      margin-bottom: 1.25rem;
+      color: #2a6df4;
+    }
+
+    .focus-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .focus-card p {
+      color: #4b5563;
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+
+    /* tech stack */
+    .tech-group {
+      margin-bottom: 2rem;
+    }
+
+    .tech-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .tech-group h4 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #6b7280;
+      margin-bottom: 0.85rem;
+      font-weight: 600;
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .tech-badge {
+      background: white;
+      border: 1px solid #e2e8f0;
+      padding: 0.65rem 1.25rem;
+      border-radius: 40px;
+      font-weight: 500;
+      font-size: 0.92rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #1e1e2f;
+      transition: all 0.2s ease;
+    }
+
+    .tech-badge i {
+      color: #2a6df4;
+      font-size: 1rem;
+    }
+
+    .tech-badge:hover {
+      background: #f0f5ff;
+      border-color: #2a6df4;
+      transform: translateY(-1px);
+    }
+
+    /* projects */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+      gap: 1.75rem;
+    }
+
+    .project-card {
+      background: white;
+      border-radius: 24px;
+      padding: 1.75rem;
+      border: 1px solid #eef2f6;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+      position: relative;
+    }
+
+    .project-card:hover {
+      border-color: #cbd5e1;
+      box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.08);
+      transform: translateY(-4px);
+    }
+
+    .project-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .project-icon {
+      font-size: 1.4rem;
+      background: #f2f6ff;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 16px;
+      color: #2a6df4;
+      flex-shrink: 0;
+    }
+
+    .project-tag {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: #2a6df4;
+      background: #eef2ff;
+      display: inline-block;
+      padding: 0.3rem 0.85rem;
+      border-radius: 30px;
+      white-space: nowrap;
+    }
+
+    .project-card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+      letter-spacing: -0.01em;
+      color: #0b0b1a;
+    }
+
+    .project-card p {
+      color: #4b5563;
+      font-size: 0.95rem;
+      line-height: 1.55;
+      margin-bottom: 1.5rem;
+      flex: 1;
+    }
+
+    /* Project Action Links */
+    .project-links {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      padding-top: 1.25rem;
+      border-top: 1px solid #f1f5f9;
+      margin-top: auto;
+    }
+
+    .project-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 0.55rem 1.1rem;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      flex: 1 1 120px;
+      min-height: 40px;
+    }
+
+    .project-btn-demo {
+      background: #2a6df4;
+      color: white;
+      border: 1px solid transparent;
+    }
+
+    .project-btn-demo:hover {
+      background: #1d57ce;
+      box-shadow: 0 6px 14px -3px rgba(42, 109, 244, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .project-btn-code {
+      background: #f8fafc;
+      color: #1e1e2f;
+      border: 1px solid #cbd5e1;
+    }
+
+    .project-btn-code:hover {
+      background: #eef2ff;
+      border-color: #2a6df4;
+      color: #2a6df4;
+      transform: translateY(-1px);
+    }
+
+    .project-no-demo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 0.55rem 1rem;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #94a3b8;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      flex: 1 1 120px;
+      min-height: 40px;
+      user-select: none;
+    }
+
+    /* journey / stats */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .stat-item {
+      background: white;
+      padding: 1.8rem 1.5rem;
+      border-radius: 24px;
+      text-align: center;
+      border: 1px solid #eef2f6;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+    }
+
+    .stat-number {
+      font-size: clamp(2.2rem, 5vw, 2.6rem);
+      font-weight: 700;
+      color: #1e1e2f;
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      color: #6b7280;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-top: 0.35rem;
+    }
+
+    .quote-block {
+      background: #f2f6ff;
+      border-radius: 24px;
+      padding: 2.2rem;
+      margin: 3rem 0 0;
+      border-left: 6px solid #2a6df4;
+    }
+
+    .quote-block p {
+      font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+      font-style: italic;
+      color: #1e1e2f;
+      font-weight: 500;
+      line-height: 1.7;
+    }
+
+    /* contact */
+    .contact-card {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.8rem;
+      align-items: center;
+      justify-content: space-between;
+      background: white;
+      padding: 2.5rem;
+      border-radius: 32px;
+      border: 1px solid #eef2f6;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03);
+    }
+
+    .contact-card-text h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #0b0b1a;
+    }
+
+    .contact-card-text p {
+      color: #4b5563;
+      font-size: 0.95rem;
+    }
+
+    /* footer */
+    footer {
+      padding: 3.5rem 0 2.5rem;
+      border-top: 1px solid #e2e8f0;
+      margin-top: 2rem;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1rem;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+      color: #3b3b58;
+      font-weight: 500;
+      font-size: 0.92rem;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: white;
+      padding: 0.45rem 1rem;
+      border-radius: 24px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .footer-links a:hover {
+      color: #2a6df4;
+      border-color: #2a6df4;
+      background: #f0f5ff;
+      transform: translateY(-1px);
+    }
+
+    .copyright {
+      margin-top: 2rem;
+      text-align: center;
+      color: #94a3b8;
+      font-size: 0.85rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #eef2f6;
+      line-height: 1.6;
+    }
+
+    /* Responsive media queries */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 1.25rem;
+      }
+
+      section {
+        padding: 3rem 0;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        padding: 1.25rem 1.5rem;
+        gap: 1rem;
+        border-radius: 20px;
+        box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.12), 0 0 1px rgba(0,0,0,0.1);
+        border: 1px solid #eef2f6;
+        display: none;
+        z-index: 100;
+        margin-top: 0.5rem;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-links a {
+        font-size: 1.05rem;
+        padding: 0.5rem 0;
+        width: 100%;
+        border-bottom: 1px solid #f1f5f9;
+      }
+
+      .nav-links a:last-child {
+        border-bottom: none;
+      }
+
+      .contact-card {
+        padding: 1.75rem 1.5rem;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .contact-card a {
+        width: 100%;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-links {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        padding: 1.5rem 0 3rem;
+        gap: 2.25rem;
+      }
+
+      .code-card {
+        transform: none;
+        padding: 1.4rem;
+        border-radius: 20px;
+      }
+
+      .code-card:hover {
+        transform: none;
+      }
+
+      .btn-group {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .btn-group a {
+        width: 100%;
+      }
+
+      .quote-block {
+        padding: 1.5rem;
+        margin-top: 2rem;
+      }
+
+      .stats-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 1rem;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-card {
+        padding: 1.5rem;
+      }
+
+      .project-links {
+        flex-direction: column;
+      }
+
+      .project-btn, .project-no-demo {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- header / nav -->
+    <header>
+      <a href="#" class="logo">DEV<span>·LK</span></a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation" aria-expanded="false">
+        <i class="fas fa-bars"></i>
+      </button>
+      <nav class="nav-links" id="navLinks">
+        <a href="#focus">Focus</a>
+        <a href="#projects">Projects</a>
+        <a href="#tech">Stack</a>
+        <a href="#journey">Journey</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <!-- hero -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <i class="fas fa-code"></i> student developer · kerala
+        </div>
+        <h1>
+          Turning ideas into<br>
+          <span class="hero-highlight">interactive experiences.</span>
+        </h1>
+        <p>
+          I'm Dev L Kakkoth — a developer who builds websites, browser games, and utility tools 
+          with JavaScript, Python, and modern web tech.
+        </p>
+        <div class="hero-tags">
+          <span>🌐 Web</span>
+          <span>🎮 Games</span>
+          <span>🧠 AI</span>
+          <span>🛠️ Tools</span>
+        </div>
+        <div class="btn-group">
+          <a href="#projects" class="btn-primary">
+            <i class="fas fa-arrow-down"></i> See my work
+          </a>
+          <a href="#contact" class="btn-outline">
+            <i class="fas fa-paper-plane"></i> Get in touch
+          </a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="code-card">
+          <div class="code-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="code-lines">
+            <div><span class="comment">// always building</span></div>
+            <div><span class="keyword">const</span> dev = {</div>
+            <div>&nbsp;&nbsp;name: <span class="string">'Dev L Kakkoth'</span>,</div>
+            <div>&nbsp;&nbsp;from: <span class="string">'Kerala'</span>,</div>
+            <div>&nbsp;&nbsp;stack: [<span class="string">'JS'</span>, <span class="string">'Python'</span>, <span class="string">'Firebase'</span>],</div>
+            <div>&nbsp;&nbsp;projects: <span class="number">12</span>+</div>
+            <div>};</div>
+            <div><span class="func">buildSomethingCool</span>();</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- focus areas -->
+    <section id="focus">
+      <div class="section-header">
+        <div class="section-label">What I focus on</div>
+        <h2 class="section-title">Areas I explore <span>— code meets creativity</span></h2>
+      </div>
+      <div class="focus-grid">
+        <div class="focus-card">
+          <div class="focus-icon"><i class="fas fa-globe"></i></div>
+          <h3>Web Development</h3>
+          <p>Responsive, interactive websites with modern JavaScript and clean UI.</p>
+        </div>
+        <div class="focus-card">
+          <div class="focus-icon"><i class="fas fa-gamepad"></i></div>
+          <h3>Browser Games</h3>
+          <p>Fun, lightweight games built entirely with web technologies.</p>
+        </div>
+        <div class="focus-card">
+          <div class="focus-icon"><i class="fas fa-brain"></i></div>
+          <h3>AI Experiments</h3>
+          <p>Exploring LLM APIs and building useful AI-powered applications.</p>
+        </div>
+        <div class="focus-card">
+          <div class="focus-icon"><i class="fas fa-tools"></i></div>
+          <h3>Tools & Apps</h3>
+          <p>Small utilities that solve real problems — from PDF tools to speed tests.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- tech stack -->
+    <section id="tech">
+      <div class="section-header">
+        <div class="section-label">My toolbox</div>
+        <h2 class="section-title">Tech stack <span>— the tools I use daily</span></h2>
+      </div>
+      <div class="tech-group">
+        <h4>Frontend & Core</h4>
+        <div class="tech-stack">
+          <div class="tech-badge"><i class="fab fa-html5"></i> HTML5</div>
+          <div class="tech-badge"><i class="fab fa-css3-alt"></i> CSS3</div>
+          <div class="tech-badge"><i class="fab fa-js"></i> JavaScript</div>
+        </div>
+      </div>
+      <div class="tech-group">
+        <h4>Backend & Services</h4>
+        <div class="tech-stack">
+          <div class="tech-badge"><i class="fab fa-python"></i> Python</div>
+          <div class="tech-badge"><i class="fas fa-fire"></i> Firebase</div>
+        </div>
+      </div>
+      <div class="tech-group">
+        <h4>Deployment & Version Control</h4>
+        <div class="tech-stack">
+          <div class="tech-badge"><i class="fas fa-cloud-arrow-up"></i> Vercel</div>
+          <div class="tech-badge"><i class="fab fa-github"></i> GitHub</div>
+        </div>
+      </div>
+      <div class="tech-group">
+        <h4>Emerging</h4>
+        <div class="tech-stack">
+          <div class="tech-badge"><i class="fas fa-robot"></i> AI APIs (LLMs)</div>
+          <div class="tech-badge"><i class="fas fa-cogs"></i> Automation</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- projects -->
+    <section id="projects">
+      <div class="section-header">
+        <div class="section-label">Selected work</div>
+        <h2 class="section-title">12+ projects <span>— shipped & experiments</span></h2>
+      </div>
+      <div class="projects-grid">
+        <!-- 01 Firework -->
+        <div class="project-card">
+          <div class="project-top">
+            <div class="project-icon"><i class="fas fa-fire"></i></div>
+            <span class="project-tag">🎮 Game</span>
+          </div>
+          <h3>Firework</h3>
+          <p>Interactive canvas-based fireworks experience with particle animation and visual effects.</p>
+          <div class="project-links">
+            <a href="https://github.com/dev-l-k/Firework" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-code">
+              <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="https://dev-l-k.github.io/Firework/" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-demo">
+              <i class="fas fa-arrow-up-right-from-square"></i> Live Demo
+            </a>
+          </div>
+        </div>
+
+        <!-- 02 GamesNew -->
+        <div class="project-card">
+          <div class="project-top">
+            <div class="project-icon"><i class="fas fa-gamepad"></i></div>
+            <span class="project-tag">🎮 Games</span>
+          </div>
+          <h3>GamesNew</h3>
+          <p>A growing collection of browser arcade games and creative experiments.</p>
+          <div class="project-links">
+            <a href="https://github.com/dev-l-k/GamesNew" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-code">
+              <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="https://dev-l-k.github.io/GamesNew/" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-demo">
+              <i class="fas fa-arrow-up-right-from-square"></i> Live Demo
+            </a>
+          </div>
+        </div>
+
+        <!-- 03 Kerala Current Bill -->
+        <div class="project-card">
+          <div class="project-top">
+            <div class="project-icon"><i class="fas fa-bolt"></i></div>
+            <span class="project-tag">🌐 Web App</span>
+          </div>
+          <h3>Kerala Current Bill</h3>
+          <p>Calculator for KSEB electricity bills based on consumption — quick and accurate.</p>
+          <div class="project-links">
+            <a href="https://github.com/dev-l-k/Kerala-Current-Bill" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-code">
+              <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="https://dev-l-k.github.io/Kerala-Current-Bill/" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-demo">
+              <i class="fas fa-arrow-up-right-from-square"></i> Live Demo
+            </a>
+          </div>
+        </div>
+
+        <!-- 04 StudyMate -->
+        <div class="project-card">
+          <div class="project-top">
+            <div class="project-icon"><i class="fas fa-graduation-cap"></i></div>
+            <span class="project-tag">🌐 Web + APK</span>
+          </div>
+          <h3>StudyMate</h3>
+          <p>Study-focused productivity app with tools for students, available on web and Android.</p>
+          <div class="project-links">
+            <a href="https://github.com/test3421699/StudyMateV2" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-code">
+              <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="https://dev-l-k.github.io/APKs/" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-demo">
+              <i class="fas fa-arrow-up-right-from-square"></i> Live Demo
+            </a>
+          </div>
+        </div>
+
+        <!-- 05 ShortUrl / OrigamiLink -->
+        <div class="project-card">
+          <div class="project-top">
+            <div class="project-icon"><i class="fas fa-link"></i></div>
+            <span class="project-tag">🌐 Tool</span>
+          </div>
+          <h3>ShortUrl</h3>
+          <p>URL shortening service (OrigamiLink) for creating shorter, shareable links with ease.</p>
+          <div class="project-links">
+            <a href="https://github.com/test3421699/ShortUrl" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-code">
+              <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="https://origamilink.vercel.app" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-demo">
+              <i class="fas fa-arrow-up-right-from-square"></i> Live Demo
+            </a>
+          </div>
+        </div>
+
+        <!-- 06 Chess Royale -->
+        <div class="project-card">
+          <div class="project-top">
+            <div class="project-icon"><i class="fas fa-chess-board"></i></div>
+            <span class="project-tag">🎮 Game</span>
+          </div>
+          <h3>Chess Royale</h3>
+          <p>Browser chess project with a modern interface and smooth interactive gameplay.</p>
+          <div class="project-links">
+            <a href="https://github.com/project3421699/Chess2.0" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-code">
+              <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="https://chess-by-privatedart.vercel.app" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-demo">
+              <i class="fas fa-arrow-up-right-from-square"></i> Live Demo
+            </a>
+          </div>
+        </div>
+
+        <!-- 07 PDF Tools -->
+        <div class="project-card">
+          <div class="project-top">
+            <div class="project-icon"><i class="fas fa-file-pdf"></i></div>
+            <span class="project-tag">🛠️ Tool</span>
+          </div>
+          <h3>PDF Tools</h3>
+          <p>A suite of browser-based PDF utilities with client-side processing for privacy.</p>
+          <div class="project-links">
+            <a href="https://github.com/project3421699/pdf-tools" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-code">
+              <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="https://project3421699.github.io/pdf-tools/" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-demo">
+              <i class="fas fa-arrow-up-right-from-square"></i> Live Demo
+            </a>
+          </div>
+        </div>
+
+        <!-- 08 LUDO -->
+        <div class="project-card">
+          <div class="project-top">
+            <div class="project-icon"><i class="fas fa-dice"></i></div>
+            <span class="project-tag">🎮 Game</span>
+          </div>
+          <h3>LUDO</h3>
+          <p>Browser-based LUDO board game with multiplayer-style UI and responsive design.</p>
+          <div class="project-links">
+            <a href="https://github.com/project3421699/LUDO" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-code">
+              <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="https://ludo-by-privatedart.vercel.app" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-demo">
+              <i class="fas fa-arrow-up-right-from-square"></i> Live Demo
+            </a>
+          </div>
+        </div>
+
+        <!-- 09 IoT Class Science Fair -->
+        <div class="project-card">
+          <div class="project-top">
+            <div class="project-icon"><i class="fas fa-microchip"></i></div>
+            <span class="project-tag">📱 IoT</span>
+          </div>
+          <h3>IoT Class Science Fair</h3>
+          <p>Hardware + software IoT project using sensors, built for a science fair showcase.</p>
+          <div class="project-links">
+            <a href="https://github.com/dev-l-k/IOT-Class-Science-Fair-" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-code">
+              <i class="fab fa-github"></i> GitHub
+            </a>
+            <span class="project-no-demo">
+              <i class="fas fa-microchip"></i> Hardware Showcase
+            </span>
+          </div>
+        </div>
+
+        <!-- 10 BT -->
+        <div class="project-card">
+          <div class="project-top">
+            <div class="project-icon"><i class="fab fa-bluetooth-b"></i></div>
+            <span class="project-tag">📱 Android</span>
+          </div>
+          <h3>BT</h3>
+          <p>Android app exploring Bluetooth functionality and device connectivity.</p>
+          <div class="project-links">
+            <a href="https://github.com/test3421699/BT" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-code">
+              <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="https://dev-l-k.github.io/APKs" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-demo">
+              <i class="fas fa-download"></i> Get APK
+            </a>
+          </div>
+        </div>
+
+        <!-- 11 QR Code Scanner -->
+        <div class="project-card">
+          <div class="project-top">
+            <div class="project-icon"><i class="fas fa-qrcode"></i></div>
+            <span class="project-tag">📱 Android</span>
+          </div>
+          <h3>QR Code Scanner</h3>
+          <p>Android QR scanning app using the Camera API for fast, reliable scans.</p>
+          <div class="project-links">
+            <a href="https://github.com/test3421699/QrCodeScanner" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-code">
+              <i class="fab fa-github"></i> GitHub
+            </a>
+            <span class="project-no-demo">
+              <i class="fas fa-mobile-screen"></i> Android App Repo
+            </span>
+          </div>
+        </div>
+
+        <!-- 12 Fast — Aero Speedtest -->
+        <div class="project-card">
+          <div class="project-top">
+            <div class="project-icon"><i class="fas fa-tachometer-alt"></i></div>
+            <span class="project-tag">🛠️ Tool</span>
+          </div>
+          <h3>Fast — Aero Speedtest</h3>
+          <p>Browser-based internet speed tester with a clean gauge UI and real-time results.</p>
+          <div class="project-links">
+            <a href="https://github.com/project974403/Fast" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-code">
+              <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="https://project974403.github.io/Fast/" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-demo">
+              <i class="fas fa-arrow-up-right-from-square"></i> Live Demo
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- journey / stats -->
+    <section id="journey">
+      <div class="section-header">
+        <div class="section-label">The journey</div>
+        <h2 class="section-title">Always building <span>— always learning</span></h2>
+      </div>
+      <div class="stats-row">
+        <div class="stat-item">
+          <div class="stat-number">12+</div>
+          <div class="stat-label">Projects shipped</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">4</div>
+          <div class="stat-label">GitHub accounts</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">∞</div>
+          <div class="stat-label">Ideas to build</div>
+        </div>
+      </div>
+      <div class="quote-block">
+        <p>
+          “Started with simple HTML pages and gradually moved into JavaScript apps, APIs, 
+          browser games, and experimental projects. Every project is an opportunity to learn 
+          something new and improve my development skills.”
+        </p>
+      </div>
+    </section>
+
+    <!-- contact -->
+    <section id="contact">
+      <div class="section-header">
+        <div class="section-label">Let's connect</div>
+        <h2 class="section-title">Open for projects <span>& collaborations</span></h2>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-text">
+          <h3>Have an idea or project in mind?</h3>
+          <p>I'm always interested in building something new. Reach out!</p>
+        </div>
+        <a href="mailto:admin@devlkakkoth.in" class="btn-primary">
+          <i class="fas fa-envelope"></i> admin@devlkakkoth.in
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-content">
+        <a href="#" class="logo" style="font-size: 1.4rem;">DEV<span>·LK</span></a>
+        <div class="footer-links">
+          <a href="https://github.com/dev-l-k" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> dev-l-k</a>
+          <a href="https://github.com/test3421699" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> test3421699</a>
+          <a href="https://github.com/project3421699" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> project3421699</a>
+          <a href="https://github.com/project974403" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> project974403</a>
+        </div>
+      </div>
+      <div class="copyright">
+        © 2025 Dev L Kakkoth — student developer from Kerala. Built with ♥ and JavaScript.
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Mobile navigation toggle
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', () => {
+        const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+        navToggle.setAttribute('aria-expanded', String(!isExpanded));
+        navLinks.classList.toggle('active');
+        
+        const icon = navToggle.querySelector('i');
+        if (icon) {
+          if (navLinks.classList.contains('active')) {
+            icon.className = 'fas fa-xmark';
+          } else {
+            icon.className = 'fas fa-bars';
+          }
+        }
+      });
+
+      // Close navigation drawer when clicking a link
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('active');
+          navToggle.setAttribute('aria-expanded', 'false');
+          const icon = navToggle.querySelector('i');
+          if (icon) icon.className = 'fas fa-bars';
+        });
+      });
+
+      // Close navigation drawer when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!navToggle.contains(e.target) && !navLinks.contains(e.target)) {
+          navLinks.classList.remove('active');
+          navToggle.setAttribute('aria-expanded', 'false');
+          const icon = navToggle.querySelector('i');
+          if (icon) icon.className = 'fas fa-bars';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
