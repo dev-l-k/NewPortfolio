@@ -3,19 +3,48 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>Dev L Kakkoth · Student Developer</title>
   <!-- Font Awesome 6 (free) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <!-- Google Fonts: Inter + JetBrains Mono for a modern, professional feel -->
+  <!-- Google Fonts: Inter + JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
+    /* ==========================================================================
+       CSS Variables & Reset
+       ========================================================================== */
+    :root {
+      --primary: #2a6df4;
+      --primary-dark: #1a56cf;
+      --primary-light: #eef2ff;
+      --primary-border: #d9e3fc;
+      --gradient: linear-gradient(135deg, #2a6df4, #8b5cf6);
+      --dark: #0a0a1a;
+      --text: #1e1e2f;
+      --text-muted: #4b5563;
+      --text-light: #6b7280;
+      --bg: #f9fafc;
+      --card-bg: #ffffff;
+      --border: #eef2f6;
+      --border-hover: #cbd5e1;
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 24px;
+      --radius-xl: 32px;
+      --radius-full: 9999px;
+      --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.03);
+      --shadow-md: 0 10px 25px -8px rgba(0, 0, 0, 0.06);
+      --shadow-hover: 0 20px 32px -12px rgba(42, 109, 244, 0.15);
+      --transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
     *, *::before, *::after {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
     }
 
     html {
@@ -24,14 +53,17 @@
     }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background-color: #f9fafc;
-      color: #1e1e2f;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
       line-height: 1.6;
       overflow-x: hidden;
       width: 100%;
     }
 
+    /* ==========================================================================
+       Layout Containers
+       ========================================================================== */
     .container {
       max-width: 1200px;
       margin: 0 auto;
@@ -39,86 +71,89 @@
       width: 100%;
     }
 
-    /* header / nav */
+    /* ==========================================================================
+       Header & Navigation (Mobile-first adaptive)
+       ========================================================================== */
+    .header-wrapper {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(249, 250, 252, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.7);
+      transition: var(--transition);
+    }
+
     header {
-      padding: 1.75rem 0 1rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: relative;
-      z-index: 50;
+      padding: 1rem 0;
+      gap: 1rem;
     }
 
     .logo {
       font-weight: 700;
-      font-size: 1.6rem;
+      font-size: 1.55rem;
       letter-spacing: -0.02em;
-      color: #0a0a1a;
+      color: var(--dark);
       text-decoration: none;
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      flex-shrink: 0;
     }
 
     .logo span {
-      background: linear-gradient(135deg, #2a6df4, #8b5cf6);
+      background: var(--gradient);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
     }
 
-    .nav-links {
+    /* Navigation Bar */
+    .nav-bar {
       display: flex;
-      gap: 2rem;
-      font-weight: 500;
-      font-size: 0.95rem;
       align-items: center;
+      gap: 0.5rem;
+      list-style: none;
     }
 
-    .nav-links a {
+    .nav-bar a {
       text-decoration: none;
-      color: #2d2d44;
-      transition: color 0.2s ease;
-      padding: 0.25rem 0;
-    }
-
-    .nav-links a:hover,
-    .nav-links a:focus {
-      color: #2a6df4;
-    }
-
-    /* mobile nav toggle button */
-    .nav-toggle {
-      display: none;
-      background: white;
-      border: 1px solid #e2e8f0;
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      cursor: pointer;
+      color: #33334d;
+      font-weight: 500;
+      font-size: 0.92rem;
+      padding: 0.45rem 1rem;
+      border-radius: var(--radius-full);
+      transition: var(--transition);
+      white-space: nowrap;
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      color: #1e1e2f;
-      font-size: 1.25rem;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
-      transition: all 0.2s ease;
+      gap: 6px;
     }
 
-    .nav-toggle:hover {
-      background: #f1f5f9;
-      color: #2a6df4;
+    .nav-bar a:hover,
+    .nav-bar a.active {
+      color: var(--primary);
+      background: var(--primary-light);
     }
 
-    /* hero */
+    /* ==========================================================================
+       Hero Section
+       ========================================================================== */
     .hero {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      padding: 3rem 0 4rem;
+      padding: 3.5rem 0 4.5rem;
       gap: 3rem;
     }
 
     .hero-content {
-      flex: 1 1 480px;
+      flex: 1 1 500px;
       min-width: 0;
     }
 
@@ -126,121 +161,118 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      background: #eef2ff;
-      color: #2a6df4;
+      background: var(--primary-light);
+      color: var(--primary);
       font-weight: 600;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       padding: 0.4rem 1.1rem;
-      border-radius: 30px;
-      margin-bottom: 1.5rem;
-      letter-spacing: 0.3px;
-      border: 1px solid #d9e3fc;
+      border-radius: var(--radius-full);
+      margin-bottom: 1.4rem;
+      letter-spacing: 0.4px;
+      border: 1px solid var(--primary-border);
     }
 
     .hero-content h1 {
-      font-size: clamp(2.2rem, 5.5vw, 3.2rem);
+      font-size: clamp(2.1rem, 5.2vw, 3.2rem);
       font-weight: 700;
-      line-height: 1.2;
+      line-height: 1.18;
       letter-spacing: -0.03em;
-      margin-bottom: 1.2rem;
-      color: #0b0b1a;
+      margin-bottom: 1.25rem;
+      color: var(--dark);
       word-break: break-word;
     }
 
     .hero-highlight {
-      background: linear-gradient(135deg, #2a6df4, #8b5cf6);
+      background: var(--gradient);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
     }
 
     .hero-content p {
-      font-size: clamp(1.05rem, 2.5vw, 1.2rem);
+      font-size: clamp(1.02rem, 2.2vw, 1.2rem);
       color: #3b3b58;
-      max-width: 550px;
-      margin-bottom: 2rem;
+      max-width: 540px;
+      margin-bottom: 1.75rem;
+      line-height: 1.65;
     }
 
     .hero-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.65rem 0.9rem;
+      gap: 0.6rem 0.8rem;
       margin-bottom: 2.2rem;
     }
 
     .hero-tags span {
-      font-size: 0.88rem;
-      background: white;
-      padding: 0.4rem 0.95rem;
-      border-radius: 40px;
+      font-size: 0.86rem;
+      background: var(--card-bg);
+      padding: 0.38rem 0.95rem;
+      border-radius: var(--radius-full);
       border: 1px solid #e2e8f0;
       font-weight: 500;
       color: #2d2d44;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
 
     .btn-group {
       display: flex;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 0.85rem;
       align-items: center;
     }
 
     .btn-primary {
       background: #1e1e2f;
-      color: white;
-      padding: 0.85rem 2rem;
-      border-radius: 60px;
+      color: #ffffff;
+      padding: 0.85rem 1.85rem;
+      border-radius: var(--radius-full);
       text-decoration: none;
       font-weight: 600;
       font-size: 0.95rem;
-      transition: all 0.2s ease;
+      transition: var(--transition);
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
       border: 1px solid transparent;
-      min-height: 48px;
-    }
-
-    .btn-primary i {
-      font-size: 1rem;
+      box-shadow: 0 4px 12px rgba(10, 10, 26, 0.1);
     }
 
     .btn-primary:hover {
-      background: #2a6df4;
+      background: var(--primary);
       transform: translateY(-2px);
-      box-shadow: 0 12px 20px -10px rgba(42, 109, 244, 0.4);
+      box-shadow: 0 12px 20px -8px rgba(42, 109, 244, 0.45);
     }
 
     .btn-outline {
-      background: transparent;
+      background: var(--card-bg);
       border: 1px solid #cbd5e1;
-      color: #1e1e2f;
-      padding: 0.85rem 2rem;
-      border-radius: 60px;
+      color: var(--text);
+      padding: 0.85rem 1.85rem;
+      border-radius: var(--radius-full);
       text-decoration: none;
       font-weight: 600;
-      transition: all 0.2s ease;
+      font-size: 0.95rem;
+      transition: var(--transition);
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      min-height: 48px;
-    }
-
-    .btn-outline i {
-      font-size: 1rem;
     }
 
     .btn-outline:hover {
-      border-color: #2a6df4;
-      color: #2a6df4;
-      background: #f0f5ff;
+      border-color: var(--primary);
+      color: var(--primary);
+      background: var(--primary-light);
+      transform: translateY(-2px);
     }
 
     .hero-visual {
-      flex: 1 1 320px;
+      flex: 1 1 340px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -250,15 +282,14 @@
 
     .code-card {
       background: #0f0f1e;
-      padding: 1.8rem;
-      border-radius: 28px;
+      padding: 1.85rem;
+      border-radius: 26px;
       width: 100%;
-      max-width: 420px;
-      box-shadow: 0 30px 40px -20px rgba(0, 0, 0, 0.4);
+      max-width: 410px;
+      box-shadow: 0 25px 45px -15px rgba(0, 0, 0, 0.35);
       border: 1px solid #2d2d4a;
-      transform: rotate(2deg);
-      transition: transform 0.3s ease;
-      overflow: hidden;
+      transform: rotate(1.5deg);
+      transition: var(--transition);
     }
 
     .code-card:hover {
@@ -272,10 +303,9 @@
     }
 
     .code-dots span {
-      width: 12px;
-      height: 12px;
+      width: 11px;
+      height: 11px;
       border-radius: 50%;
-      background: #3e3e5e;
     }
 
     .code-dots span:first-child { background: #f87171; }
@@ -284,9 +314,9 @@
 
     .code-lines {
       font-family: 'JetBrains Mono', monospace;
-      font-size: clamp(0.78rem, 2.2vw, 0.9rem);
+      font-size: 0.88rem;
       color: #cbd5e1;
-      line-height: 1.8;
+      line-height: 1.75;
       overflow-x: auto;
       white-space: pre-wrap;
       word-break: break-word;
@@ -298,9 +328,12 @@
     .code-lines .func { color: #60a5fa; }
     .code-lines .number { color: #fbbf24; }
 
-    /* section styling */
+    /* ==========================================================================
+       Section Basics
+       ========================================================================== */
     section {
       padding: 4.5rem 0;
+      scroll-margin-top: 4.5rem;
     }
 
     .section-header {
@@ -311,75 +344,80 @@
     }
 
     .section-label {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       text-transform: uppercase;
       letter-spacing: 2px;
-      font-weight: 600;
-      color: #2a6df4;
-      margin-bottom: 0.6rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
     }
 
     .section-title {
-      font-size: clamp(1.85rem, 4.5vw, 2.5rem);
+      font-size: clamp(1.85rem, 4vw, 2.5rem);
       font-weight: 700;
       letter-spacing: -0.02em;
-      color: #0b0b1a;
-      line-height: 1.25;
+      color: var(--dark);
+      line-height: 1.22;
     }
 
     .section-title span {
-      color: #6b7280;
+      color: var(--text-light);
       font-weight: 400;
     }
 
-    /* focus / services grid */
+    /* ==========================================================================
+       Focus Grid
+       ========================================================================== */
     .focus-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
       gap: 1.5rem;
     }
 
     .focus-card {
-      background: white;
-      padding: 1.8rem 1.5rem;
-      border-radius: 24px;
-      border: 1px solid #eef2f6;
-      transition: all 0.25s ease;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+      background: var(--card-bg);
+      padding: 1.85rem 1.6rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
     }
 
     .focus-card:hover {
-      border-color: #cbd5e1;
-      box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.08);
+      border-color: var(--border-hover);
+      box-shadow: var(--shadow-hover);
       transform: translateY(-4px);
     }
 
     .focus-icon {
-      font-size: 1.8rem;
-      background: #eef2ff;
-      width: 56px;
-      height: 56px;
+      font-size: 1.65rem;
+      background: var(--primary-light);
+      width: 52px;
+      height: 52px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 18px;
+      border-radius: 16px;
       margin-bottom: 1.25rem;
-      color: #2a6df4;
+      color: var(--primary);
     }
 
     .focus-card h3 {
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       margin-bottom: 0.5rem;
       font-weight: 600;
+      color: var(--dark);
     }
 
     .focus-card p {
-      color: #4b5563;
-      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-size: 0.92rem;
       line-height: 1.55;
     }
 
-    /* tech stack */
+    /* ==========================================================================
+       Tech Stack
+       ========================================================================== */
     .tech-group {
       margin-bottom: 2rem;
     }
@@ -389,10 +427,10 @@
     }
 
     .tech-group h4 {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #6b7280;
+      letter-spacing: 1.2px;
+      color: var(--text-light);
       margin-bottom: 0.85rem;
       font-weight: 600;
     }
@@ -404,52 +442,98 @@
     }
 
     .tech-badge {
-      background: white;
+      background: var(--card-bg);
       border: 1px solid #e2e8f0;
-      padding: 0.65rem 1.25rem;
-      border-radius: 40px;
+      padding: 0.6rem 1.2rem;
+      border-radius: var(--radius-full);
       font-weight: 500;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      color: #1e1e2f;
-      transition: all 0.2s ease;
+      color: var(--text);
+      transition: var(--transition);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
     }
 
     .tech-badge i {
-      color: #2a6df4;
-      font-size: 1rem;
+      color: var(--primary);
+      font-size: 0.95rem;
     }
 
     .tech-badge:hover {
-      background: #f0f5ff;
-      border-color: #2a6df4;
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
       transform: translateY(-1px);
     }
 
-    /* projects */
+    /* ==========================================================================
+       Projects Section & Filtering
+       ========================================================================== */
+    .project-filters {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .project-filters::-webkit-scrollbar {
+      display: none;
+    }
+
+    .filter-btn {
+      background: var(--card-bg);
+      border: 1px solid #e2e8f0;
+      color: #4b5563;
+      padding: 0.45rem 1.1rem;
+      border-radius: var(--radius-full);
+      font-size: 0.88rem;
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .filter-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+      box-shadow: 0 4px 12px rgba(42, 109, 244, 0.28);
+    }
+
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
       gap: 1.75rem;
     }
 
     .project-card {
-      background: white;
-      border-radius: 24px;
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
       padding: 1.75rem;
-      border: 1px solid #eef2f6;
-      transition: all 0.25s ease;
+      border: 1px solid var(--border);
+      transition: var(--transition);
       display: flex;
       flex-direction: column;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+      box-shadow: var(--shadow-sm);
       position: relative;
     }
 
     .project-card:hover {
-      border-color: #cbd5e1;
-      box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.08);
+      border-color: var(--border-hover);
+      box-shadow: var(--shadow-hover);
       transform: translateY(-4px);
     }
 
@@ -462,15 +546,15 @@
     }
 
     .project-icon {
-      font-size: 1.4rem;
-      background: #f2f6ff;
-      width: 50px;
-      height: 50px;
+      font-size: 1.35rem;
+      background: var(--primary-light);
+      width: 48px;
+      height: 48px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 16px;
-      color: #2a6df4;
+      border-radius: 14px;
+      color: var(--primary);
       flex-shrink: 0;
     }
 
@@ -478,172 +562,167 @@
       font-size: 0.75rem;
       text-transform: uppercase;
       font-weight: 600;
-      letter-spacing: 0.5px;
-      color: #2a6df4;
-      background: #eef2ff;
+      letter-spacing: 0.4px;
+      color: var(--primary);
+      background: var(--primary-light);
       display: inline-block;
-      padding: 0.3rem 0.85rem;
-      border-radius: 30px;
+      padding: 0.3rem 0.8rem;
+      border-radius: var(--radius-full);
       white-space: nowrap;
+      border: 1px solid var(--primary-border);
     }
 
     .project-card h3 {
-      font-size: 1.25rem;
+      font-size: 1.22rem;
       font-weight: 600;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.5rem;
       letter-spacing: -0.01em;
-      color: #0b0b1a;
+      color: var(--dark);
     }
 
     .project-card p {
-      color: #4b5563;
-      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-size: 0.92rem;
       line-height: 1.55;
       margin-bottom: 1.5rem;
-      flex: 1;
+      flex-grow: 1;
     }
 
     /* Project Action Links */
     .project-links {
       display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
+      gap: 0.65rem;
       padding-top: 1.25rem;
       border-top: 1px solid #f1f5f9;
       margin-top: auto;
     }
 
-    .project-btn {
+    .btn-action {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 7px;
-      padding: 0.55rem 1.1rem;
+      gap: 6px;
+      padding: 0.55rem 0.95rem;
       border-radius: 12px;
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       font-weight: 600;
       text-decoration: none;
-      transition: all 0.2s ease;
-      flex: 1 1 120px;
+      transition: var(--transition);
+      flex: 1 1 0;
       min-height: 40px;
+      white-space: nowrap;
     }
 
-    .project-btn-demo {
-      background: #2a6df4;
-      color: white;
-      border: 1px solid transparent;
-    }
-
-    .project-btn-demo:hover {
-      background: #1d57ce;
-      box-shadow: 0 6px 14px -3px rgba(42, 109, 244, 0.4);
-      transform: translateY(-1px);
-    }
-
-    .project-btn-code {
+    .btn-action-code {
       background: #f8fafc;
       color: #1e1e2f;
       border: 1px solid #cbd5e1;
     }
 
-    .project-btn-code:hover {
-      background: #eef2ff;
-      border-color: #2a6df4;
-      color: #2a6df4;
+    .btn-action-code:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
       transform: translateY(-1px);
     }
 
-    .project-no-demo {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      padding: 0.55rem 1rem;
-      border-radius: 12px;
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: #94a3b8;
-      background: #f8fafc;
-      border: 1px dashed #cbd5e1;
-      flex: 1 1 120px;
-      min-height: 40px;
-      user-select: none;
+    .btn-action-demo {
+      background: var(--primary);
+      color: #ffffff;
+      border: 1px solid transparent;
+      box-shadow: 0 2px 8px rgba(42, 109, 244, 0.25);
     }
 
-    /* journey / stats */
+    .btn-action-demo:hover {
+      background: var(--primary-dark);
+      box-shadow: 0 6px 14px rgba(42, 109, 244, 0.35);
+      transform: translateY(-1px);
+    }
+
+    .btn-action-full {
+      flex: 1 1 100%;
+    }
+
+    /* ==========================================================================
+       Journey / Stats
+       ========================================================================== */
     .stats-row {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
       margin-top: 2rem;
     }
 
     .stat-item {
-      background: white;
-      padding: 1.8rem 1.5rem;
-      border-radius: 24px;
+      background: var(--card-bg);
+      padding: 1.6rem 1.2rem;
+      border-radius: var(--radius-lg);
       text-align: center;
-      border: 1px solid #eef2f6;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
     }
 
     .stat-number {
-      font-size: clamp(2.2rem, 5vw, 2.6rem);
+      font-size: clamp(2rem, 4.5vw, 2.5rem);
       font-weight: 700;
-      color: #1e1e2f;
-      line-height: 1.2;
+      color: var(--dark);
+      line-height: 1.15;
     }
 
     .stat-label {
-      color: #6b7280;
-      font-size: 0.9rem;
+      color: var(--text-light);
+      font-size: 0.88rem;
       font-weight: 500;
       margin-top: 0.35rem;
     }
 
     .quote-block {
-      background: #f2f6ff;
-      border-radius: 24px;
+      background: var(--primary-light);
+      border-radius: var(--radius-lg);
       padding: 2.2rem;
-      margin: 3rem 0 0;
-      border-left: 6px solid #2a6df4;
+      margin: 2.5rem 0 0;
+      border-left: 5px solid var(--primary);
     }
 
     .quote-block p {
-      font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+      font-size: clamp(1.02rem, 2vw, 1.2rem);
       font-style: italic;
-      color: #1e1e2f;
+      color: var(--text);
       font-weight: 500;
-      line-height: 1.7;
+      line-height: 1.68;
     }
 
-    /* contact */
+    /* ==========================================================================
+       Contact Card
+       ========================================================================== */
     .contact-card {
       display: flex;
       flex-wrap: wrap;
       gap: 1.8rem;
       align-items: center;
       justify-content: space-between;
-      background: white;
+      background: var(--card-bg);
       padding: 2.5rem;
-      border-radius: 32px;
-      border: 1px solid #eef2f6;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
     }
 
     .contact-card-text h3 {
       font-size: 1.25rem;
       font-weight: 600;
-      margin-bottom: 0.5rem;
-      color: #0b0b1a;
+      margin-bottom: 0.4rem;
+      color: var(--dark);
     }
 
     .contact-card-text p {
-      color: #4b5563;
+      color: var(--text-muted);
       font-size: 0.95rem;
     }
 
-    /* footer */
+    /* ==========================================================================
+       Footer
+       ========================================================================== */
     footer {
       padding: 3.5rem 0 2.5rem;
       border-top: 1px solid #e2e8f0;
@@ -655,34 +734,34 @@
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      gap: 2rem;
+      gap: 1.5rem;
     }
 
     .footer-links {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem 1rem;
+      gap: 0.65rem 0.85rem;
     }
 
     .footer-links a {
       text-decoration: none;
       color: #3b3b58;
       font-weight: 500;
-      font-size: 0.92rem;
-      transition: all 0.2s ease;
+      font-size: 0.88rem;
+      transition: var(--transition);
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      background: white;
-      padding: 0.45rem 1rem;
-      border-radius: 24px;
+      background: var(--card-bg);
+      padding: 0.45rem 0.95rem;
+      border-radius: var(--radius-full);
       border: 1px solid #e2e8f0;
     }
 
     .footer-links a:hover {
-      color: #2a6df4;
-      border-color: #2a6df4;
-      background: #f0f5ff;
+      color: var(--primary);
+      border-color: var(--primary);
+      background: var(--primary-light);
       transform: translateY(-1px);
     }
 
@@ -692,11 +771,23 @@
       color: #94a3b8;
       font-size: 0.85rem;
       padding-top: 1.5rem;
-      border-top: 1px solid #eef2f6;
+      border-top: 1px solid var(--border);
       line-height: 1.6;
     }
 
-    /* Responsive media queries */
+    /* ==========================================================================
+       Responsive Breakpoints (Carefully tuned margins & typography)
+       ========================================================================== */
+    @media (max-width: 900px) {
+      .hero {
+        padding: 2.5rem 0 3.5rem;
+        gap: 2.5rem;
+      }
+      .projects-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      }
+    }
+
     @media (max-width: 768px) {
       .container {
         padding: 0 1.25rem;
@@ -704,48 +795,92 @@
 
       section {
         padding: 3rem 0;
+        scroll-margin-top: 4rem;
       }
 
-      .nav-toggle {
-        display: flex;
+      .section-header {
+        margin-bottom: 1.75rem;
       }
 
-      .nav-links {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: white;
-        flex-direction: column;
-        padding: 1.25rem 1.5rem;
-        gap: 1rem;
-        border-radius: 20px;
-        box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.12), 0 0 1px rgba(0,0,0,0.1);
-        border: 1px solid #eef2f6;
+      header {
+        padding: 0.75rem 0;
+      }
+
+      /* Horizontal scrolling pill navbar on mobile */
+      .nav-bar {
+        overflow-x: auto;
+        padding: 0.25rem 0;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+        gap: 0.35rem;
+      }
+
+      .nav-bar::-webkit-scrollbar {
         display: none;
-        z-index: 100;
-        margin-top: 0.5rem;
       }
 
-      .nav-links.active {
-        display: flex;
+      .nav-bar a {
+        font-size: 0.84rem;
+        padding: 0.35rem 0.75rem;
+        background: rgba(255, 255, 255, 0.8);
+        border: 1px solid #e2e8f0;
       }
 
-      .nav-links a {
+      .nav-bar a:hover,
+      .nav-bar a.active {
+        background: var(--primary);
+        color: #ffffff;
+        border-color: var(--primary);
+      }
+
+      .hero {
+        padding: 2rem 0 3rem;
+        gap: 2.25rem;
+      }
+
+      .code-card {
+        transform: none;
+        padding: 1.4rem;
+        border-radius: 20px;
+        max-width: 100%;
+      }
+
+      .code-card:hover {
+        transform: none;
+      }
+
+      /* 2-column focus grid on tablet/mobile */
+      .focus-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+
+      .focus-card {
+        padding: 1.35rem 1.15rem;
+        border-radius: var(--radius-md);
+      }
+
+      .focus-icon {
+        width: 44px;
+        height: 44px;
+        font-size: 1.35rem;
+        border-radius: 12px;
+        margin-bottom: 0.9rem;
+      }
+
+      .focus-card h3 {
         font-size: 1.05rem;
-        padding: 0.5rem 0;
-        width: 100%;
-        border-bottom: 1px solid #f1f5f9;
       }
 
-      .nav-links a:last-child {
-        border-bottom: none;
+      .focus-card p {
+        font-size: 0.85rem;
       }
 
       .contact-card {
-        padding: 1.75rem 1.5rem;
+        padding: 1.75rem 1.4rem;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: stretch;
+        text-align: center;
       }
 
       .contact-card a {
@@ -754,91 +889,162 @@
 
       .footer-content {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
+        text-align: center;
+        gap: 1.25rem;
       }
 
       .footer-links {
-        width: 100%;
+        justify-content: center;
       }
     }
 
-    @media (max-width: 640px) {
-      .hero {
-        padding: 1.5rem 0 3rem;
-        gap: 2.25rem;
-      }
-
-      .code-card {
-        transform: none;
-        padding: 1.4rem;
-        border-radius: 20px;
-      }
-
-      .code-card:hover {
-        transform: none;
-      }
-
-      .btn-group {
-        flex-direction: column;
-        width: 100%;
-      }
-
-      .btn-group a {
-        width: 100%;
-      }
-
-      .quote-block {
-        padding: 1.5rem;
-        margin-top: 2rem;
-      }
-
-      .stats-row {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 480px) {
+    @media (max-width: 520px) {
       .container {
         padding: 0 1rem;
       }
 
-      .projects-grid {
+      section {
+        padding: 2.5rem 0;
+      }
+
+      .section-header {
+        margin-bottom: 1.5rem;
+      }
+
+      .hero {
+        padding: 1.5rem 0 2.5rem;
+        gap: 2rem;
+      }
+
+      .hero-badge {
+        font-size: 0.78rem;
+        padding: 0.35rem 0.95rem;
+        margin-bottom: 1rem;
+      }
+
+      .hero-content h1 {
+        font-size: 2.15rem;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+      }
+
+      .hero-content p {
+        font-size: 0.98rem;
+        line-height: 1.6;
+        margin-bottom: 1.4rem;
+      }
+
+      .hero-tags {
+        margin-bottom: 1.6rem;
+        gap: 0.5rem;
+      }
+
+      .hero-tags span {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.75rem;
+      }
+
+      .btn-group {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        gap: 0.6rem;
+      }
+
+      .btn-group a {
+        flex: 1 1 0;
+        padding: 0.75rem 0.9rem;
+        font-size: 0.88rem;
+        white-space: nowrap;
+      }
+
+      .focus-grid {
         grid-template-columns: 1fr;
       }
 
+      .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+
       .project-card {
-        padding: 1.5rem;
+        padding: 1.4rem;
+        border-radius: var(--radius-md);
       }
 
-      .project-links {
-        flex-direction: column;
+      .project-card h3 {
+        font-size: 1.15rem;
       }
 
-      .project-btn, .project-no-demo {
+      .project-card p {
+        font-size: 0.88rem;
+        margin-bottom: 1.25rem;
+      }
+
+      .stats-row {
+        gap: 0.65rem;
+      }
+
+      .stat-item {
+        padding: 1.2rem 0.6rem;
+        border-radius: var(--radius-md);
+      }
+
+      .stat-number {
+        font-size: 1.75rem;
+      }
+
+      .stat-label {
+        font-size: 0.75rem;
+      }
+
+      .quote-block {
+        padding: 1.4rem 1.2rem;
+        border-radius: var(--radius-md);
+        margin-top: 1.75rem;
+      }
+
+      .quote-block p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+
+      .footer-links {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
         width: 100%;
+        gap: 0.5rem;
+      }
+
+      .footer-links a {
+        justify-content: center;
+        font-size: 0.8rem;
+        padding: 0.45rem 0.6rem;
       }
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <!-- header / nav -->
-    <header>
-      <a href="#" class="logo">DEV<span>·LK</span></a>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation" aria-expanded="false">
-        <i class="fas fa-bars"></i>
-      </button>
-      <nav class="nav-links" id="navLinks">
-        <a href="#focus">Focus</a>
-        <a href="#projects">Projects</a>
-        <a href="#tech">Stack</a>
-        <a href="#journey">Journey</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </header>
+  <!-- Sticky Header with Adaptive Navigation -->
+  <div class="header-wrapper">
+    <div class="container">
+      <header>
+        <a href="#" class="logo">DEV<span>·LK</span></a>
+        <nav class="nav-bar" id="mainNav">
+          <a href="#focus" class="active"><i class="fas fa-layer-group"></i> Focus</a>
+          <a href="#projects"><i class="fas fa-laptop-code"></i> Projects</a>
+          <a href="#tech"><i class="fas fa-cubes"></i> Stack</a>
+          <a href="#journey"><i class="fas fa-route"></i> Journey</a>
+          <a href="#contact"><i class="fas fa-paper-plane"></i> Contact</a>
+        </nav>
+      </header>
+    </div>
+  </div>
 
-    <!-- hero -->
+  <div class="container">
+    <!-- Hero Section -->
     <section class="hero">
       <div class="hero-content">
         <div class="hero-badge">
@@ -886,7 +1092,7 @@
       </div>
     </section>
 
-    <!-- focus areas -->
+    <!-- Focus Areas -->
     <section id="focus">
       <div class="section-header">
         <div class="section-label">What I focus on</div>
@@ -916,7 +1122,7 @@
       </div>
     </section>
 
-    <!-- tech stack -->
+    <!-- Tech Stack -->
     <section id="tech">
       <div class="section-header">
         <div class="section-label">My toolbox</div>
@@ -953,15 +1159,25 @@
       </div>
     </section>
 
-    <!-- projects -->
+    <!-- Projects -->
     <section id="projects">
       <div class="section-header">
         <div class="section-label">Selected work</div>
         <h2 class="section-title">12+ projects <span>— shipped & experiments</span></h2>
       </div>
+
+      <!-- Category Filter Pills -->
+      <div class="project-filters">
+        <button class="filter-btn active" data-filter="all">All (12)</button>
+        <button class="filter-btn" data-filter="game">🎮 Games</button>
+        <button class="filter-btn" data-filter="web">🌐 Web & Apps</button>
+        <button class="filter-btn" data-filter="tool">🛠️ Tools</button>
+        <button class="filter-btn" data-filter="mobile">📱 Android & IoT</button>
+      </div>
+
       <div class="projects-grid">
         <!-- 01 Firework -->
-        <div class="project-card">
+        <div class="project-card" data-category="game">
           <div class="project-top">
             <div class="project-icon"><i class="fas fa-fire"></i></div>
             <span class="project-tag">🎮 Game</span>
@@ -969,17 +1185,17 @@
           <h3>Firework</h3>
           <p>Interactive canvas-based fireworks experience with particle animation and visual effects.</p>
           <div class="project-links">
-            <a href="https://github.com/dev-l-k/Firework" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-code">
+            <a href="https://github.com/dev-l-k/Firework" target="_blank" rel="noopener noreferrer" class="btn-action btn-action-code">
               <i class="fab fa-github"></i> GitHub
             </a>
-            <a href="https://dev-l-k.github.io/Firework/" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-demo">
-              <i class="fas fa-arrow-up-right-from-square"></i> Live Demo
+            <a href="https://dev-l-k.github.io/Firework/" target="_blank" rel="noopener noreferrer" class="btn-action btn-action-demo">
+              <i class="fas fa-arrow-up-right-from-square"></i> Demo
             </a>
           </div>
         </div>
 
         <!-- 02 GamesNew -->
-        <div class="project-card">
+        <div class="project-card" data-category="game">
           <div class="project-top">
             <div class="project-icon"><i class="fas fa-gamepad"></i></div>
             <span class="project-tag">🎮 Games</span>
@@ -987,17 +1203,17 @@
           <h3>GamesNew</h3>
           <p>A growing collection of browser arcade games and creative experiments.</p>
           <div class="project-links">
-            <a href="https://github.com/dev-l-k/GamesNew" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-code">
+            <a href="https://github.com/dev-l-k/GamesNew" target="_blank" rel="noopener noreferrer" class="btn-action btn-action-code">
               <i class="fab fa-github"></i> GitHub
             </a>
-            <a href="https://dev-l-k.github.io/GamesNew/" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-demo">
-              <i class="fas fa-arrow-up-right-from-square"></i> Live Demo
+            <a href="https://dev-l-k.github.io/GamesNew/" target="_blank" rel="noopener noreferrer" class="btn-action btn-action-demo">
+              <i class="fas fa-arrow-up-right-from-square"></i> Demo
             </a>
           </div>
         </div>
 
         <!-- 03 Kerala Current Bill -->
-        <div class="project-card">
+        <div class="project-card" data-category="web">
           <div class="project-top">
             <div class="project-icon"><i class="fas fa-bolt"></i></div>
             <span class="project-tag">🌐 Web App</span>
@@ -1005,17 +1221,17 @@
           <h3>Kerala Current Bill</h3>
           <p>Calculator for KSEB electricity bills based on consumption — quick and accurate.</p>
           <div class="project-links">
-            <a href="https://github.com/dev-l-k/Kerala-Current-Bill" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-code">
+            <a href="https://github.com/dev-l-k/Kerala-Current-Bill" target="_blank" rel="noopener noreferrer" class="btn-action btn-action-code">
               <i class="fab fa-github"></i> GitHub
             </a>
-            <a href="https://dev-l-k.github.io/Kerala-Current-Bill/" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-demo">
-              <i class="fas fa-arrow-up-right-from-square"></i> Live Demo
+            <a href="https://dev-l-k.github.io/Kerala-Current-Bill/" target="_blank" rel="noopener noreferrer" class="btn-action btn-action-demo">
+              <i class="fas fa-arrow-up-right-from-square"></i> Demo
             </a>
           </div>
         </div>
 
         <!-- 04 StudyMate -->
-        <div class="project-card">
+        <div class="project-card" data-category="web">
           <div class="project-top">
             <div class="project-icon"><i class="fas fa-graduation-cap"></i></div>
             <span class="project-tag">🌐 Web + APK</span>
@@ -1023,17 +1239,17 @@
           <h3>StudyMate</h3>
           <p>Study-focused productivity app with tools for students, available on web and Android.</p>
           <div class="project-links">
-            <a href="https://github.com/test3421699/StudyMateV2" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-code">
+            <a href="https://github.com/test3421699/StudyMateV2" target="_blank" rel="noopener noreferrer" class="btn-action btn-action-code">
               <i class="fab fa-github"></i> GitHub
             </a>
-            <a href="https://dev-l-k.github.io/APKs/" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-demo">
-              <i class="fas fa-arrow-up-right-from-square"></i> Live Demo
+            <a href="https://dev-l-k.github.io/APKs/" target="_blank" rel="noopener noreferrer" class="btn-action btn-action-demo">
+              <i class="fas fa-arrow-up-right-from-square"></i> Demo
             </a>
           </div>
         </div>
 
         <!-- 05 ShortUrl / OrigamiLink -->
-        <div class="project-card">
+        <div class="project-card" data-category="tool">
           <div class="project-top">
             <div class="project-icon"><i class="fas fa-link"></i></div>
             <span class="project-tag">🌐 Tool</span>
@@ -1041,17 +1257,17 @@
           <h3>ShortUrl</h3>
           <p>URL shortening service (OrigamiLink) for creating shorter, shareable links with ease.</p>
           <div class="project-links">
-            <a href="https://github.com/test3421699/ShortUrl" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-code">
+            <a href="https://github.com/test3421699/ShortUrl" target="_blank" rel="noopener noreferrer" class="btn-action btn-action-code">
               <i class="fab fa-github"></i> GitHub
             </a>
-            <a href="https://origamilink.vercel.app" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-demo">
-              <i class="fas fa-arrow-up-right-from-square"></i> Live Demo
+            <a href="https://origamilink.vercel.app" target="_blank" rel="noopener noreferrer" class="btn-action btn-action-demo">
+              <i class="fas fa-arrow-up-right-from-square"></i> Demo
             </a>
           </div>
         </div>
 
         <!-- 06 Chess Royale -->
-        <div class="project-card">
+        <div class="project-card" data-category="game">
           <div class="project-top">
             <div class="project-icon"><i class="fas fa-chess-board"></i></div>
             <span class="project-tag">🎮 Game</span>
@@ -1059,17 +1275,17 @@
           <h3>Chess Royale</h3>
           <p>Browser chess project with a modern interface and smooth interactive gameplay.</p>
           <div class="project-links">
-            <a href="https://github.com/project3421699/Chess2.0" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-code">
+            <a href="https://github.com/project3421699/Chess2.0" target="_blank" rel="noopener noreferrer" class="btn-action btn-action-code">
               <i class="fab fa-github"></i> GitHub
             </a>
-            <a href="https://chess-by-privatedart.vercel.app" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-demo">
-              <i class="fas fa-arrow-up-right-from-square"></i> Live Demo
+            <a href="https://chess-by-privatedart.vercel.app" target="_blank" rel="noopener noreferrer" class="btn-action btn-action-demo">
+              <i class="fas fa-arrow-up-right-from-square"></i> Demo
             </a>
           </div>
         </div>
 
         <!-- 07 PDF Tools -->
-        <div class="project-card">
+        <div class="project-card" data-category="tool">
           <div class="project-top">
             <div class="project-icon"><i class="fas fa-file-pdf"></i></div>
             <span class="project-tag">🛠️ Tool</span>
@@ -1077,17 +1293,17 @@
           <h3>PDF Tools</h3>
           <p>A suite of browser-based PDF utilities with client-side processing for privacy.</p>
           <div class="project-links">
-            <a href="https://github.com/project3421699/pdf-tools" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-code">
+            <a href="https://github.com/project3421699/pdf-tools" target="_blank" rel="noopener noreferrer" class="btn-action btn-action-code">
               <i class="fab fa-github"></i> GitHub
             </a>
-            <a href="https://project3421699.github.io/pdf-tools/" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-demo">
-              <i class="fas fa-arrow-up-right-from-square"></i> Live Demo
+            <a href="https://project3421699.github.io/pdf-tools/" target="_blank" rel="noopener noreferrer" class="btn-action btn-action-demo">
+              <i class="fas fa-arrow-up-right-from-square"></i> Demo
             </a>
           </div>
         </div>
 
         <!-- 08 LUDO -->
-        <div class="project-card">
+        <div class="project-card" data-category="game">
           <div class="project-top">
             <div class="project-icon"><i class="fas fa-dice"></i></div>
             <span class="project-tag">🎮 Game</span>
@@ -1095,17 +1311,17 @@
           <h3>LUDO</h3>
           <p>Browser-based LUDO board game with multiplayer-style UI and responsive design.</p>
           <div class="project-links">
-            <a href="https://github.com/project3421699/LUDO" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-code">
+            <a href="https://github.com/project3421699/LUDO" target="_blank" rel="noopener noreferrer" class="btn-action btn-action-code">
               <i class="fab fa-github"></i> GitHub
             </a>
-            <a href="https://ludo-by-privatedart.vercel.app" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-demo">
-              <i class="fas fa-arrow-up-right-from-square"></i> Live Demo
+            <a href="https://ludo-by-privatedart.vercel.app" target="_blank" rel="noopener noreferrer" class="btn-action btn-action-demo">
+              <i class="fas fa-arrow-up-right-from-square"></i> Demo
             </a>
           </div>
         </div>
 
         <!-- 09 IoT Class Science Fair -->
-        <div class="project-card">
+        <div class="project-card" data-category="mobile">
           <div class="project-top">
             <div class="project-icon"><i class="fas fa-microchip"></i></div>
             <span class="project-tag">📱 IoT</span>
@@ -1113,17 +1329,14 @@
           <h3>IoT Class Science Fair</h3>
           <p>Hardware + software IoT project using sensors, built for a science fair showcase.</p>
           <div class="project-links">
-            <a href="https://github.com/dev-l-k/IOT-Class-Science-Fair-" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-code">
-              <i class="fab fa-github"></i> GitHub
+            <a href="https://github.com/dev-l-k/IOT-Class-Science-Fair-" target="_blank" rel="noopener noreferrer" class="btn-action btn-action-code btn-action-full">
+              <i class="fab fa-github"></i> GitHub Repository
             </a>
-            <span class="project-no-demo">
-              <i class="fas fa-microchip"></i> Hardware Showcase
-            </span>
           </div>
         </div>
 
         <!-- 10 BT -->
-        <div class="project-card">
+        <div class="project-card" data-category="mobile">
           <div class="project-top">
             <div class="project-icon"><i class="fab fa-bluetooth-b"></i></div>
             <span class="project-tag">📱 Android</span>
@@ -1131,17 +1344,17 @@
           <h3>BT</h3>
           <p>Android app exploring Bluetooth functionality and device connectivity.</p>
           <div class="project-links">
-            <a href="https://github.com/test3421699/BT" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-code">
+            <a href="https://github.com/test3421699/BT" target="_blank" rel="noopener noreferrer" class="btn-action btn-action-code">
               <i class="fab fa-github"></i> GitHub
             </a>
-            <a href="https://dev-l-k.github.io/APKs" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-demo">
+            <a href="https://dev-l-k.github.io/APKs" target="_blank" rel="noopener noreferrer" class="btn-action btn-action-demo">
               <i class="fas fa-download"></i> Get APK
             </a>
           </div>
         </div>
 
         <!-- 11 QR Code Scanner -->
-        <div class="project-card">
+        <div class="project-card" data-category="mobile">
           <div class="project-top">
             <div class="project-icon"><i class="fas fa-qrcode"></i></div>
             <span class="project-tag">📱 Android</span>
@@ -1149,17 +1362,14 @@
           <h3>QR Code Scanner</h3>
           <p>Android QR scanning app using the Camera API for fast, reliable scans.</p>
           <div class="project-links">
-            <a href="https://github.com/test3421699/QrCodeScanner" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-code">
-              <i class="fab fa-github"></i> GitHub
+            <a href="https://github.com/test3421699/QrCodeScanner" target="_blank" rel="noopener noreferrer" class="btn-action btn-action-code btn-action-full">
+              <i class="fab fa-github"></i> GitHub Repository
             </a>
-            <span class="project-no-demo">
-              <i class="fas fa-mobile-screen"></i> Android App Repo
-            </span>
           </div>
         </div>
 
         <!-- 12 Fast — Aero Speedtest -->
-        <div class="project-card">
+        <div class="project-card" data-category="tool">
           <div class="project-top">
             <div class="project-icon"><i class="fas fa-tachometer-alt"></i></div>
             <span class="project-tag">🛠️ Tool</span>
@@ -1167,18 +1377,18 @@
           <h3>Fast — Aero Speedtest</h3>
           <p>Browser-based internet speed tester with a clean gauge UI and real-time results.</p>
           <div class="project-links">
-            <a href="https://github.com/project974403/Fast" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-code">
+            <a href="https://github.com/project974403/Fast" target="_blank" rel="noopener noreferrer" class="btn-action btn-action-code">
               <i class="fab fa-github"></i> GitHub
             </a>
-            <a href="https://project974403.github.io/Fast/" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-demo">
-              <i class="fas fa-arrow-up-right-from-square"></i> Live Demo
+            <a href="https://project974403.github.io/Fast/" target="_blank" rel="noopener noreferrer" class="btn-action btn-action-demo">
+              <i class="fas fa-arrow-up-right-from-square"></i> Demo
             </a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- journey / stats -->
+    <!-- Journey / Stats -->
     <section id="journey">
       <div class="section-header">
         <div class="section-label">The journey</div>
@@ -1207,7 +1417,7 @@
       </div>
     </section>
 
-    <!-- contact -->
+    <!-- Contact -->
     <section id="contact">
       <div class="section-header">
         <div class="section-label">Let's connect</div>
@@ -1224,6 +1434,7 @@
       </div>
     </section>
 
+    <!-- Footer -->
     <footer>
       <div class="footer-content">
         <a href="#" class="logo" style="font-size: 1.4rem;">DEV<span>·LK</span></a>
@@ -1235,52 +1446,56 @@
         </div>
       </div>
       <div class="copyright">
-        © 2025 Dev L Kakkoth — student developer from Kerala. Built with ♥ and JavaScript.
+        © 2026 Dev L Kakkoth — student developer from Kerala. Built with ♥️ and JavaScript.
       </div>
     </footer>
   </div>
 
   <script>
-    // Mobile navigation toggle
-    const navToggle = document.getElementById('navToggle');
-    const navLinks = document.getElementById('navLinks');
+    // Navigation active link tracking on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-bar a');
 
-    if (navToggle && navLinks) {
-      navToggle.addEventListener('click', () => {
-        const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
-        navToggle.setAttribute('aria-expanded', String(!isExpanded));
-        navLinks.classList.toggle('active');
-        
-        const icon = navToggle.querySelector('i');
-        if (icon) {
-          if (navLinks.classList.contains('active')) {
-            icon.className = 'fas fa-xmark';
-          } else {
-            icon.className = 'fas fa-bars';
-          }
+    window.addEventListener('scroll', () => {
+      let current = '';
+      const scrollY = window.pageYOffset;
+
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 120;
+        const sectionHeight = section.offsetHeight;
+        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+          current = section.getAttribute('id');
         }
       });
 
-      // Close navigation drawer when clicking a link
-      navLinks.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-          navLinks.classList.remove('active');
-          navToggle.setAttribute('aria-expanded', 'false');
-          const icon = navToggle.querySelector('i');
-          if (icon) icon.className = 'fas fa-bars';
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Project category filtering
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        const filter = button.getAttribute('data-filter');
+
+        projectCards.forEach(card => {
+          if (filter === 'all' || card.getAttribute('data-category') === filter) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
         });
       });
-
-      // Close navigation drawer when clicking outside
-      document.addEventListener('click', (e) => {
-        if (!navToggle.contains(e.target) && !navLinks.contains(e.target)) {
-          navLinks.classList.remove('active');
-          navToggle.setAttribute('aria-expanded', 'false');
-          const icon = navToggle.querySelector('i');
-          if (icon) icon.className = 'fas fa-bars';
-        }
-      });
-    }
+    });
   </script>
 </body>
 </html>
